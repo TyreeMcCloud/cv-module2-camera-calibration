@@ -41,7 +41,7 @@ print("3. Press any key once you have clicked both.")
 
 while len(points) < 2:
     cv2.imshow("Click Top-Left then Bottom-Right", temp_img)
-    if cv2.waitKey(1) & 0xFF == 27: # Press ESC to cancel
+    if cv2.waitKey(1) & 0xFF == 27:
         break
 
 cv2.waitKey(0)
@@ -61,15 +61,17 @@ if len(points) == 2:
     real_height = (height_p * Z) / fy
     
     print("-" * 40)
+    print(f"Object Pixel Width (w): {width_p} pixels")
+    print(f"Object Pixel Height (h): {height_p} pixels")
     print(f"Calculated Width: {real_width:.2f} mm")
     print(f"Calculated Height: {real_height:.2f} mm")
     print("-" * 40)
 
-    # 6. Visualization for Video
+    # 6. Visualization
     cv2.rectangle(image, points[0], points[1], (0, 255, 0), 8)
     label = f"W: {real_width:.1f}mm, H: {real_height:.1f}mm"
     cv2.putText(image, label, (u1, v1 - 25), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 5)
-    
+
     # Show final result
     result_small = cv2.resize(image, (800, 600))
     cv2.imshow("Final Result", result_small)

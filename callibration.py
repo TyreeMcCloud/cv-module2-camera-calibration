@@ -15,8 +15,8 @@ objp = np.zeros((CHECKERBOARD[0] * CHECKERBOARD[1], 3), np.float32)
 objp[:, :2] = np.mgrid[0:CHECKERBOARD[0], 0:CHECKERBOARD[1]].T.reshape(-1, 2)
 objp *= SQUARE_SIZE
 
-objpoints = [] 
-imgpoints = [] 
+objpoints = []
+imgpoints = []
 
 image_folder = 'calibration_images'
 images = glob.glob(os.path.join(image_folder, '*.jpg')) + \
@@ -31,8 +31,8 @@ print(f"Found {len(images)} images. Processing...")
 for fname in images:
     img = cv2.imread(fname)
     if img is None: continue
-    
-    # Resize for speed - this prevents the "stuck" feeling
+
+    # Resize for speed
     small_img = cv2.resize(img, None, fx=RESIZE_FACTOR, fy=RESIZE_FACTOR)
     gray = cv2.cvtColor(small_img, cv2.COLOR_BGR2GRAY)
 
@@ -44,10 +44,10 @@ for fname in images:
         objpoints.append(objp)
         # Refine corners
         corners2 = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
-        
-        # IMPORTANT: Scale corners back up to the original image size
+
+        #Scale corners back up to the original image size
         imgpoints.append(corners2 / RESIZE_FACTOR)
-        
+
         # Visual feedback
         cv2.drawChessboardCorners(small_img, CHECKERBOARD, corners2, ret)
         cv2.imshow('Detecting...', small_img)
@@ -60,7 +60,7 @@ cv2.destroyAllWindows()
 if len(objpoints) > 0:
     # Use the ORIGINAL image resolution for the final calibration
     original_shape = cv2.imread(images[0]).shape[:2][::-1]
-    
+
     print(f"\nCalibrating based on {len(objpoints)} successful images...")
     ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(
         objpoints, imgpoints, original_shape, None, None
