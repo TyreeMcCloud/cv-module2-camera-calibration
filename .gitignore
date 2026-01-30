@@ -1,1 +1,5 @@
 .github
+calibration_images/*.jpg
+calibration_images/*.JPG
+test_images/*.jpg
+test_images/*.JPG

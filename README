@@ -1,9 +1,9 @@
 Step 1: Calibrate your camera
 
-Put your checkerboard photos in the calibration_images/ folder. (ALREADY THERE)
+Put your checkerboard photos in the calibration_images/ folder.
 
 Open your terminal and run:
-python3 calibrate.py
+python3 callibration.py
 When it's done, it will create a file called camera_params.json.
 
 Step 2: Measure an object
