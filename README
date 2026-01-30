@@ -1,0 +1,20 @@
+Step 1: Calibrate your camera
+
+Put your checkerboard photos in the calibration_images/ folder. (ALREADY THERE)
+
+Open your terminal and run:
+python3 calibrate.py
+When it's done, it will create a file called camera_params.json.
+
+Step 2: Measure an object
+
+Take a photo of an object from at least 2 meters away and put it in test_images/.
+Open projection_measure.py and change the Z variable to the exact distance you stood from the object (in mm).
+
+Run the script:
+
+python3 projection_measure.py
+Clicking: A window opens. Click the top-left corner of the object, then the bottom-right corner.
+press ENTER
+
+The real-world width and height will print in the terminal and on the Image.
